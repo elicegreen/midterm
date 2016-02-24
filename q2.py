@@ -1,11 +1,15 @@
-# This is a very simple game of sticks. There are 21 sticks, first the user picks number of sticks between 1-4, then the computer picks sticks(1-4). Who ever will pick the last stick will lose.
-# Look for the TODO blocks as an indication of when you have to add your own code.
+# This is a very simple game of sticks. There are 21 sticks, first the user picks number of sticks between 1-4, then the computer picks sticks(1-4).
+# Who ever will pick the last stick will lose.
 
 import random
 sticks = 21
 
+
+
+
+#Main game function
+
 def playGame():
-    # you do not need to modify code in this function
     print('There are 21 sticks. You can pick from 1 to 4 sticks at a time, and the computer will then pick from 1 to 4 sticks at a time. Whoever picks the last stick loses!')
     while True:
         print('Current sticks: ' + str(sticks))
@@ -19,22 +23,47 @@ def playGame():
         if subtractSticks( computerChoice ):
             print('Computer lost!')
             break
+
+
+
+
         
-
+# This functiont asks the user to enter their input (between 1 and 4) and return that input as an integer
+# If the user's input is not valid (if it's not between 1 and 4), the user is asked to re-enter their input until enters valid input.
+    
 def askUserChoice():
-    # TODO: write code in this functiont that:
-    # 1. Asks the user to enter their input (between 1 and 4)
-    # 2. Checks that the user's input is valid. If it's not valid (if it's not between 1 and 4), then ask the user to re-enter their input.
-    # 3. Once the user enters a valid input, return that input as an integer.
+    validInput = ['1', '2', '3', '4']
+    print('Please enter a number between 1 and 4')
+    userNum = input()
+    while True:
+        if userNum not in validInput:
+            print('Your selection is invalid. Please enter a number between 1 and 4')
+            userNum = input()
+        else:
+            return int(userNum)
 
+                  
+
+
+
+# This function subtracts the parameter `number` from the global variable `sticks`
+# If the number subtracted resulted in the last stick, it returns True
+# If there are still sticks left, it returns False
 
 def subtractSticks( number ):
-    global sticks 
+    global sticks
+    sticks = sticks - number
+    if sticks <= 0:
+        return True
+    else:
+        return False
+
+
+
+
     
-    # TODO: write code inside this function that:
-    # 1. subtracts the parameter `number` from the global variable `sticks`
-    # 2. checks if the number subtracted resulted in the last stick, if so, return True
-    # 3. if there are still sticks left, return False
+# This function returns an integer between 1 and 4, randomly chosen by the computer
     
 def determineComputerChoice():
-    # TODO: write code inside this function that returns an integer between 1 and 4, random chosen by the computer
+        return random.randint(1,4)
+
